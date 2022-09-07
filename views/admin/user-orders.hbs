@@ -1,0 +1,60 @@
+<section>
+    <div class="container">
+
+        <div class="row">
+            {{!-- <a href="/admin/add-product" class="btn btn-success ml-auto">Add Product</a> --}}
+
+        </div>
+
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">No.s</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Pincode</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Order Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                <tr>
+                    <th scope="row" class="counterCell"></th>
+                    <td style="font-size: xx-small;">{{this.date}}</td>
+                    <td>{{this.deliveryDetails.address}}</td>
+                    <td>{{this.deliveryDetails.pincode}}</td>
+                    <td>{{this.deliveryDetails.mobile}}</td>
+                    <td>{{this.totalAmount}}</td>
+                    <td>{{this.paymentMethod}}</td>
+                    <td>{{this.status}}</td>
+                    <td>
+                        <a type="button" href="/view-order-products/{{this._id}}"
+                            class="view btn btn-outline-primary">Products</a>
+
+                    </td>
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<style>
+    .view {
+        width: 100%;
+
+    }
+
+    table {
+        counter-reset: tableCount;
+    }
+
+    .counterCell:before {
+        content: counter(tableCount);
+        counter-increment: tableCount;
+    }
+</style>

@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-md-6 m-auto">
+        <div class="container mt-5 pl-5">
+            {{#each userDetails}}
+            <h2 class="text-center">{{this.Name}}</h2>
+            <h3 class="text-center">Email: {{this.Email}}</h3>
+            <h3 class="text-center">Phone: {{this.mobile}}</h3>
+            <div class="text-center pt-5">
+                <a href="/change-password/{{this._id}}" class="btn btn-info" data-toggle="modal"
+                    data-target="#exampleModalCenter" type="button">Change Password</a>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST">
+
+                                <div class="form-group">
+                                    <label for="">New Password</label>
+                                    <input type="password" class="form-control" name="Password" id="password1"
+                                        placeholder="new password" autocomplete="off">
+                                </div>
+                            </form>
+                            <form action="/new-password/{{this._id}}" method="POST">
+
+                                <div class="form-group">
+                                    <label for="">Confirm Password</label>
+                                    <input type="password" class="form-control" name="Password" id="password2"
+                                        placeholder="confirm password" autocomplete="off">
+                                </div>
+                                {{!-- <div class="col-sm-12">
+                                    <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>
+                                    Passwords Match
+                                </div> --}}
+                                <div class="registrationFormAlert form-group" style="color:rgb(0, 0, 0);"
+                                    id="CheckPasswordMatch">
+                                </div>
+
+                                <button type="submit" id="btnSubmit" class="btn btn-primary float-right">Change
+                                    Password</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+<script>
+
+    $(function () {
+        $("#btnSubmit").click(function () {
+            var password = $("#password1").val();
+            var confirmPassword = $("#password2").val();
+            if (password != confirmPassword) {
+                $("#CheckPasswordMatch").html("Password does not match !").css("color", "red");
+                return false;
+            } else {
+                $("#CheckPasswordMatch").html("Password match !").css("color", "green");
+                return true;
+            }
+        });
+    });
+</script>
+<script>
+    function checkPasswordMatch() {
+        var password = $("#password1").val();
+        var confirmPassword = $("#password2").val();
+        if (password != confirmPassword)
+            $("#CheckPasswordMatch").html("Password does not match !").css("color", "red");
+        else
+            $("#CheckPasswordMatch").html("Password match !").css("color", "green");
+    }
+    $(document).ready(function () {
+        $("#password2").keyup(checkPasswordMatch);
+    });</script>

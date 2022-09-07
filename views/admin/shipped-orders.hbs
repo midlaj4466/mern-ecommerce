@@ -1,0 +1,89 @@
+<section>
+    <div class="container pt-5">
+
+        <table class="table mt-5" id="productsTable">
+            <thead>
+                <tr>
+
+                    <th scope="col">User</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Pincode</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Order Status</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                {{#if this.shipped}}
+                <tr>
+                    <td class="changeColorGreen" style="font-size: xx-small;"><a
+                            href="/admin/user-details/{{this.userId}}">{{this.userId}}</a>
+                    </td>
+                    <td class="changeColorGreen" style="font-size: xx-small;">{{this.date}}</td>
+                    <td class="changeColorGreen">{{this.deliveryDetails.address}}</td>
+                    <td class="changeColorGreen">{{this.deliveryDetails.pincode}}</td>
+                    <td class="changeColorGreen">{{this.deliveryDetails.mobile}}</td>
+                    <td class="changeColorGreen">{{this.totalAmount}}</td>
+                    <td class="changeColorGreen">{{this.paymentMethod}}</td>
+                    <td class="changeColorGreen">{{this.status}}</td>
+                    <td class="changeColorGreen">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a type=" button" href="/admin/view-order-products/{{this._id}}"
+                                class="view btn btn-outline-primary dropdown-item">Products</a>
+                            {{#if this.delivered}}
+                            <div class="pt-1">
+                                <a href="/admin/delivered-products/{{this._id}}" class="btn btn-secondary dropdown-item"
+                                    onclick="return confirm('Are you want to Mark this order as Delivered {{this._id}}?')">Function</a>
+                            </div>
+                            {{else}}
+                            <div class="pt-1">
+                                <a href="/admin/delivered-products/{{this._id}}" class="btn btn-secondary dropdown-item"
+                                    onclick="return confirm('Are you want to Mark this order as Delivered {{this._id}}?')">Delivered?</a>
+                            </div>
+                            {{/if}}
+                        </div>
+
+                    </td>
+
+                </tr>
+                {{/if}}
+
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<style>
+    .view {
+        width: 100%;
+
+    }
+
+    table {
+        counter-reset: tableCount;
+    }
+
+    .counterCell:before {
+        content: counter(tableCount);
+        counter-increment: tableCount;
+    }
+
+    .changeColorRed {
+        color: rgb(0, 0, 0);
+        background-color: rgb(253, 188, 188);
+    }
+
+    .changeColorGreen {
+        color: rgb(0, 0, 0);
+        background-color: rgb(191, 252, 206);
+    }
+</style>

@@ -1,0 +1,7 @@
+{{#each userDetails}}
+<h4 class="text-center pt-5">Name: {{this.Name}}</h4>
+<h5 class="text-center">Email: {{this.Email}}</h5>
+<div class="text-center pt-5">
+    <a href="/admin/user-orders/{{this._id}}" class=" btn btn-secondary">Orders</a>
+</div>
+{{/each}}

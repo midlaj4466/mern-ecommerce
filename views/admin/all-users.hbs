@@ -1,0 +1,71 @@
+<section>
+    <div class="container pt-5">
+
+        <table class="table mt-5" id="productsTable">
+            <thead>
+                <tr>
+
+                    <th scope="col">User Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Last Logginned</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each users}}
+
+                <tr>
+                    <td class="">{{this.Name}}</td>
+                    <td class="">{{this.Email}}</td>
+                    <td class="" style="font-size: x-small;">{{this.lastLogin}}</td>
+                    <td class="">
+                        <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a type=" button" style="float: right;" href="/admin/user-orders/{{this._id}}"
+                                class="view btn btn-outline-primary dropdown-item">
+                                <i title="orders" class="fas fa-shopping-cart"></i>
+                            </a>
+
+                            <div class="pt-1">
+                                <a href="/admin/delete-user/{{this._id}}" class="btn btn-secondary dropdown-item"
+                                    onclick="return confirm('Are you want to delete the user {{this.Name}}?')">
+                                    <i title="delete user" class=" fas fa-user-minus"></i>
+                                </a>
+                            </div>
+
+                            <div class="pt-1">
+                                <a href="/admin/reset-password/{{this._id}}" class="btn btn-secondary dropdown-item"
+                                    onclick="return confirm('Are you want to reset  {{this.Name}} s Password?')">
+                                    <i title="reset password" class="fab fa-rev"></i>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<style>
+    .view {
+        width: 100%;
+
+    }
+
+    table {
+        counter-reset: tableCount;
+    }
+
+    .counterCell:before {
+        content: counter(tableCount);
+        counter-increment: tableCount;
+    }
+</style>
